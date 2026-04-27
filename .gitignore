@@ -1,0 +1,15 @@
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+node_modules/
+__pycache__/
+*.pyc
+
+# segredos e estado local
+data/.env
+data/ficha.json
+data/.ficha-*.tmp
+scripts/ngrok-multi.yml
+.git-credentials

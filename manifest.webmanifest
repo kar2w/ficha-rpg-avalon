@@ -1,0 +1,25 @@
+{
+  "name": "Ficha Avalon",
+  "short_name": "Avalon",
+  "description": "Ficha de RPG do sistema Avalon — preencher, marcar e rabiscar.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#2a2a2a",
+  "theme_color": "#1a1a1a",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' fill='%231a1a1a'/><text x='96' y='118' font-size='84' font-family='Georgia' font-weight='bold' fill='%236b4f2a' text-anchor='middle'>A</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' fill='%231a1a1a'/><text x='256' y='320' font-size='240' font-family='Georgia' font-weight='bold' fill='%236b4f2a' text-anchor='middle'>A</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

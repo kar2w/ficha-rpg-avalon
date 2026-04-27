@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#1a1a1a" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Avalon" />
+<meta name="mobile-web-app-capable" content="yes" />
+<title>Ficha Avalon</title>
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <button id="btn-menu" class="menu-toggle" type="button" aria-label="Abrir menu">☰</button>
+  <div class="brand"><span id="brand-aba">Ficha Avalon</span></div>
+  <div class="tools">
+    <input id="file-import" type="file" accept="application/json" hidden />
+    <span id="save-status" class="save-status">salvo</span>
+  </div>
+</header>
+
+<!-- Toolbar de formatação (aparece quando foca em editor de texto) -->
+<div id="format-toolbar" class="format-toolbar" hidden>
+  <button type="button" class="fmt-btn" data-cmd="h2" title="Título (Ctrl+1)">H2</button>
+  <button type="button" class="fmt-btn" data-cmd="h3" title="Subtítulo (Ctrl+2)">H3</button>
+  <button type="button" class="fmt-btn" data-cmd="bold" title="Negrito (Ctrl+B)"><b>B</b></button>
+  <button type="button" class="fmt-btn" data-cmd="italic" title="Itálico (Ctrl+I)"><i>I</i></button>
+  <span class="fmt-sep"></span>
+  <button type="button" class="fmt-btn" data-cmd="paragrafo" title="Parágrafo normal">¶</button>
+</div>
+
+<!-- Sidebar lateral (drawer no mobile) -->
+<div id="sidebar-overlay" class="sidebar-overlay" hidden></div>
+<aside id="sidebar" class="sidebar" hidden>
+  <div class="sidebar-head">
+    <picture class="logo-avalon" aria-label="Avalon"><img src="assets/avalon.png" alt="AVALON" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-avalon-fallback',textContent:'AVALON'}))" /></picture>
+  </div>
+  <nav class="nav-abas">
+    <button class="nav-item" data-tab="frente">🛡️ Ficha</button>
+    <button class="nav-item" data-tab="verso1">✨ Energia &amp; Anotações</button>
+    <button class="nav-item" data-tab="verso2">📜 Habilidades</button>
+    <button class="nav-item" data-tab="encontros">⚔️ Encontros</button>
+    <button class="nav-item" data-tab="diario">📔 Diário de sessões</button>
+    <button class="nav-item" data-tab="background">📖 Background</button>
+  </nav>
+  <div class="nav-acoes">
+    <button id="btn-export" class="nav-action">⬇ Exportar ficha</button>
+    <button id="btn-import" class="nav-action">⬆ Importar ficha</button>
+    <button id="btn-reset" class="nav-action danger" title="Apagar tudo e começar do zero">🗑 Resetar tudo</button>
+  </div>
+</aside>
+
+<main class="pages">
+
+  <!-- ============== PÁGINA 1 — ENCONTROS ============== -->
+  <section class="page page-encontros" data-page="encontros">
+    <div class="page-grid p-encontros">
+      <picture class="logo-avalon big-logo" aria-label="Avalon"><img src="assets/avalon.png" alt="AVALON" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-avalon-fallback',textContent:'AVALON'}))" /></picture>
+      <div class="card centered-title bg-banner">ENCONTROS</div>
+      <div class="card encontros-card">
+        <table class="encontros-tabela">
+          <thead>
+            <tr>
+              <th class="col-icone"></th>
+              <th class="col-nome">Nome</th>
+              <th class="col-desc">Descrição</th>
+              <th class="col-acao"></th>
+            </tr>
+          </thead>
+          <tbody id="encontros-body"></tbody>
+        </table>
+        <button id="btn-add-encontro" type="button" class="btn-add">+ Adicionar encontro</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== PÁGINA 1 — FRENTE ============== -->
+  <section class="page page-1" data-page="frente">
+
+    <div class="page-grid p1">
+
+      <div class="card identidade-card">
+        <div class="ident-rows">
+          <label class="ident-row"><span>Nome:</span><input type="text" data-field="nome" /></label>
+          <label class="ident-row"><span>Nome do jogador:</span><input type="text" data-field="jogador" /></label>
+          <label class="ident-row"><span>Raça:</span><input type="text" data-field="raca" /></label>
+          <div class="ident-row-double">
+            <label class="ident-row"><span>Classe:</span><input type="text" data-field="classe" /></label>
+            <label class="ident-row"><span>Clã:</span><input type="text" data-field="cla" /></label>
+          </div>
+          <label class="ident-row"><span>Patrono:</span><input type="text" data-field="patrono" /></label>
+        </div>
+        <picture class="logo-avalon" aria-label="Avalon">
+          <img src="assets/avalon.png" alt="AVALON" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-avalon-fallback',textContent:'AVALON'}))" />
+        </picture>
+      </div>
+
+      <div class="card atributos-card">
+        <div class="atrib">
+          <div class="shield">
+            <input class="shield-num" type="text" inputmode="numeric" data-field="atr_impeto" />
+            <span class="shield-dot"><input type="text" inputmode="numeric" maxlength="2" data-field="atr_impeto_dot" /></span>
+          </div>
+          <div class="atrib-label">ÍMPETO</div>
+        </div>
+        <div class="atrib">
+          <div class="shield">
+            <input class="shield-num" type="text" inputmode="numeric" data-field="atr_razao" />
+            <span class="shield-dot"><input type="text" inputmode="numeric" maxlength="2" data-field="atr_razao_dot" /></span>
+          </div>
+          <div class="atrib-label">RAZÃO</div>
+        </div>
+        <div class="atrib">
+          <div class="shield">
+            <input class="shield-num" type="text" inputmode="numeric" data-field="atr_vinculo" />
+            <span class="shield-dot"><input type="text" inputmode="numeric" maxlength="2" data-field="atr_vinculo_dot" /></span>
+          </div>
+          <div class="atrib-label">VÍNCULO</div>
+        </div>
+        <div class="atrib">
+          <div class="shield">
+            <input class="shield-num" type="text" inputmode="numeric" data-field="atr_sombras" />
+            <span class="shield-dot"><input type="text" inputmode="numeric" maxlength="2" data-field="atr_sombras_dot" /></span>
+          </div>
+          <div class="atrib-label">SOMBRAS</div>
+        </div>
+      </div>
+
+      <div class="card pv-card">
+        <div class="card-title">PV:</div>
+        <div class="pv-content">
+          <div class="big-circle">
+            <input type="text" inputmode="numeric" data-field="pv_total" />
+          </div>
+          <div class="skulls-row">
+            <label class="skull"><input type="checkbox" data-field="pv1" /><svg viewBox="0 0 24 24"><path d="M12 2C7 2 4 5.5 4 10c0 2.6 1 4.5 2.5 5.7V18a1 1 0 0 0 1 1h1.5v2h2v-2h2v2h2v-2H16a1 1 0 0 0 1-1v-2.3C18.5 14.5 20 12.6 20 10c0-4.5-3-8-8-8Zm-3 8a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm-4.5 5h3l-.5 2h-2l-.5-2Z"/></svg></label>
+            <label class="skull"><input type="checkbox" data-field="pv2" /><svg viewBox="0 0 24 24"><path d="M12 2C7 2 4 5.5 4 10c0 2.6 1 4.5 2.5 5.7V18a1 1 0 0 0 1 1h1.5v2h2v-2h2v2h2v-2H16a1 1 0 0 0 1-1v-2.3C18.5 14.5 20 12.6 20 10c0-4.5-3-8-8-8Zm-3 8a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm-4.5 5h3l-.5 2h-2l-.5-2Z"/></svg></label>
+            <label class="skull"><input type="checkbox" data-field="pv3" /><svg viewBox="0 0 24 24"><path d="M12 2C7 2 4 5.5 4 10c0 2.6 1 4.5 2.5 5.7V18a1 1 0 0 0 1 1h1.5v2h2v-2h2v2h2v-2H16a1 1 0 0 0 1-1v-2.3C18.5 14.5 20 12.6 20 10c0-4.5-3-8-8-8Zm-3 8a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm-4.5 5h3l-.5 2h-2l-.5-2Z"/></svg></label>
+          </div>
+        </div>
+      </div>
+
+      <div class="card armadura-card">
+        <div class="card-title">ARMADURA:</div>
+        <div class="armadura-content">
+          <div class="big-circle">
+            <input type="text" inputmode="numeric" data-field="armadura_val" />
+          </div>
+        </div>
+        <div class="arma-header">
+          <div class="card-title arma-title">ARMA PRINCIPAL:</div>
+          <button id="btn-escolher-arma" type="button" class="btn-iconish" title="Escolher do D&amp;D 5e">📜</button>
+        </div>
+        <textarea class="line-input arma-input" data-field="arma_principal" rows="1" placeholder="—"></textarea>
+      </div>
+
+      <div class="card vinculos-card">
+        <div class="card-title">VÍNCULOS:</div>
+        <textarea data-field="vinculos"></textarea>
+      </div>
+
+      <div class="card pets-card">
+        <div class="card-title">PETS:</div>
+        <textarea data-field="pets"></textarea>
+      </div>
+
+      <div class="card itens-card">
+        <div class="itens-header">
+          <span class="card-title">ITENS:</span>
+          <button id="btn-add-item" type="button" class="btn-add">+ Adicionar item</button>
+        </div>
+        <div class="itens-lista" id="itens-lista"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============== PÁGINA 2 — VERSO COM ENERGIA E ANOTAÇÕES ============== -->
+  <section class="page page-2" data-page="verso1">
+    <div class="page-grid p2">
+      <picture class="logo-avalon big-logo" aria-label="Avalon"><img src="assets/avalon.png" alt="AVALON" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-avalon-fallback',textContent:'AVALON'}))" /></picture>
+      <div class="card energia-card">
+        <div class="energia-row">
+          <div class="card-title">ENERGIA ARCANA:</div>
+          <div class="big-circle">
+            <input type="text" inputmode="numeric" data-field="energia_arcana" />
+          </div>
+          <div class="card-title corrupcao-title">CORRUPÇÃO:</div>
+          <div class="corrupcao">
+            <label class="dot"><input type="checkbox" data-field="corrupcao1" /><span></span></label>
+            <label class="dot"><input type="checkbox" data-field="corrupcao2" /><span></span></label>
+            <label class="dot"><input type="checkbox" data-field="corrupcao3" /><span></span></label>
+            <label class="dot"><input type="checkbox" data-field="corrupcao4" /><span></span></label>
+          </div>
+        </div>
+        <div class="lined lined-edit lined-scroll" data-field="anotacoes" contenteditable="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== PÁGINA 3 — HABILIDADES ADQUIRIDAS ============== -->
+  <section class="page page-3" data-page="verso2">
+    <div class="page-grid p3">
+      <picture class="logo-avalon big-logo" aria-label="Avalon"><img src="assets/avalon.png" alt="AVALON" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-avalon-fallback',textContent:'AVALON'}))" /></picture>
+      <div class="card habilidades-card">
+        <div class="card-title centered-title">HABILIDADES ADQUIRIDAS:</div>
+        <div class="lined lined-edit lined-scroll" data-field="habilidades" contenteditable="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== PÁGINA 4 — BACKGROUND DO PERSONAGEM ============== -->
+  <section class="page page-4" data-page="background">
+    <div class="page-grid p-bg">
+      <picture class="logo-avalon big-logo" aria-label="Avalon"><img src="assets/avalon.png" alt="AVALON" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-avalon-fallback',textContent:'AVALON'}))" /></picture>
+      <div class="card centered-title bg-banner">BACKGROUND DO PERSONAGEM</div>
+      <div class="bg-grid">
+        <div class="card bg-card">
+          <div class="card-title">APARÊNCIA</div>
+          <div class="lined lined-edit" data-field="bg_aparencia" contenteditable="true"></div>
+        </div>
+        <div class="card bg-card">
+          <div class="card-title">PERSONALIDADE</div>
+          <div class="lined lined-edit" data-field="bg_personalidade" contenteditable="true"></div>
+        </div>
+        <div class="card bg-card">
+          <div class="card-title">HISTÓRIA</div>
+          <div class="lined lined-edit" data-field="bg_historia" contenteditable="true"></div>
+        </div>
+        <div class="card bg-card">
+          <div class="card-title">OBJETIVOS &amp; MEDOS</div>
+          <div class="lined lined-edit" data-field="bg_objetivos" contenteditable="true"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============== PÁGINA 6 — ANOTAÇÕES LIVRES / DIÁRIO ============== -->
+  <section class="page page-diario" data-page="diario">
+    <div class="page-grid p-diario">
+      <picture class="logo-avalon big-logo" aria-label="Avalon"><img src="assets/avalon.png" alt="AVALON" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'logo-avalon-fallback',textContent:'AVALON'}))" /></picture>
+      <div class="card diario-card">
+        <div class="card-title centered-title">ANOTAÇÕES &amp; DIÁRIO DE SESSÕES</div>
+        <div class="lined lined-edit lined-scroll" data-field="diario" contenteditable="true"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============== MODAL DE ÍCONE DO ENCONTRO ============== -->
+<div id="modal-icone" class="modal-backdrop" hidden>
+  <div class="modal modal-upload" role="dialog" aria-modal="true">
+    <header class="modal-header">
+      <span class="modal-eyebrow">Ícone</span>
+      <span id="modal-icone-titulo" class="modal-title">Selecione uma imagem</span>
+      <button class="modal-close" type="button" aria-label="Fechar">×</button>
+    </header>
+    <div id="dropzone" class="dropzone">
+      <div class="dropzone-preview" id="dropzone-preview" hidden></div>
+      <div class="dropzone-msg">
+        <div class="dropzone-icon">🖼️</div>
+        <p>Arraste uma imagem aqui</p>
+        <p class="dropzone-or">ou</p>
+        <button id="icone-pick" type="button" class="btn-iconish notas">Escolher arquivo</button>
+        <input id="icone-file" type="file" accept="image/*" hidden />
+      </div>
+    </div>
+    <div class="dropzone-actions">
+      <button id="icone-remover" type="button" class="nav-action danger">Remover ícone</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============== MODAL DE ARMAS D&D 5e ============== -->
+<div id="modal-armas" class="modal-backdrop" hidden>
+  <div class="modal modal-lista" role="dialog" aria-modal="true">
+    <header class="modal-header">
+      <span class="modal-eyebrow">Arma principal</span>
+      <span class="modal-title">D&amp;D 5e</span>
+      <button class="modal-close" type="button" aria-label="Fechar">×</button>
+    </header>
+    <div class="modal-search">
+      <input id="armas-busca" type="search" placeholder="Buscar arma…" autocomplete="off" />
+    </div>
+    <div id="armas-lista" class="armas-lista"></div>
+  </div>
+</div>
+
+<!-- ============== MODAL DE ANOTAÇÕES DO ENCONTRO ============== -->
+<div id="modal-encontro" class="modal-backdrop" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+    <header class="modal-header">
+      <span class="modal-eyebrow">Encontro</span>
+      <span id="modal-titulo" class="modal-title">—</span>
+      <button class="modal-close" type="button" aria-label="Fechar">×</button>
+    </header>
+    <textarea id="modal-anotacoes" class="lined modal-textarea" rows="14" placeholder="Anotações sobre este encontro…"></textarea>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
