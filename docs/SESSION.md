@@ -2,6 +2,29 @@
 
 Estado atual e tarefas em andamento. Lê no início; atualiza no fim.
 
+## Sessão 2026-04-27 — Docs unificados + backstory da Ayla
+
+### Estado
+- ✅ Docs migrados pro padrão `_hub/`: `CLAUDE.md` + `docs/HANDOFF.md` (renomeado de `ficha-rpg-avalon.md`) + `CHANGELOG.md`.
+- ✅ Graphify rodado pela 1ª vez (38 nodes / 54 edges / 8 communities).
+- ✅ Backstory da Ayla **rascunhada em 3 parágrafos**: origem rua + mercenários, encontro com Sirena (sombras das costas, adoção aos 15), identidade dupla maga/ladina.
+- ✅ Idade definida: **19 anos atualmente, 4 anos com a Sirena**.
+- ✅ Família Heiman descartada (era só worldbuilding, sem peso na história).
+
+### Em aberto (depende de input externo)
+
+- ⏳ **História da Sirena** — Koda (mestra da mesa) vai mandar pro Lucas. Quando vier, costuro no 2º parágrafo da backstory.
+- ⏳ **Aprofundar anos com mercenários** (11-15 anos) — Lucas tem 6 perguntas pra responder (entrada no grupo, tamanho/perfil, laços, saída, se ainda existem hoje, tom).
+- ⏳ **Patrono** — campo da ficha em aberto.
+- ⏳ **Atributos ÍMPETO/RAZÃO/VÍNCULO/SOMBRAS** — sugiro valores quando narrativa fechar. SOMBRAS pode amarrar com a magia da Sirena (gancho potente).
+
+### Em aberto (manutenção)
+
+- 🔧 **Logo Avalon**: Lucas precisa salvar PNG em `assets/avalon.png` manualmente.
+- 🔧 **Validação visual em iPhone real** — só foi testado via DOM dimensions.
+
+---
+
 ## Sessão 2026-04-26 — Bootstrap
 
 ### Estado

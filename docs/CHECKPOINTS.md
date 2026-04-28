@@ -2,6 +2,42 @@
 
 Marcos atingidos. Append-only.
 
+## 2026-04-27 — Backstory da Ayla rascunhada
+
+**Contexto:** Lucas pediu ajuda pra escrever a backstory da personagem.
+
+**Decisão/Descoberta:** 3 parágrafos rascunhados cobrindo origem (rua + mercenários), encontro com Sirena (sombras saindo das costas, adoção aos 15) e identidade dupla (maga por aparência, ladina de fato). Idade definida: **19 anos atual, 4 anos com a Sirena**.
+
+**Em aberto:**
+- História da **Sirena** — aguarda **Koda** (mestra da mesa) mandar.
+- Aprofundamento dos anos com mercenários (11-15 anos) — Lucas vai responder 6 perguntas direcionadas que mandei.
+- Atributo **SOMBRAS** pode ter conexão temática com Sirena (eco do treino) — fica em standby até Koda confirmar magia da mestra.
+- **Patrono** — campo da ficha em aberto.
+
+**Por quê:** material de mesa precisa estar pronto pra Lucas usar; mas a história da Sirena depende da Koda, então rascunho ficou em parágrafos modulares (fácil ajustar 2º parágrafo quando vier).
+
+---
+
+## 2026-04-27 — Família Heiman descartada
+
+**Contexto:** Memory + HANDOFF mencionavam "vinculada à família Heiman (Vale do Silisto)".
+
+**Decisão:** Removido. Lucas esclareceu que Heiman é só worldbuilding (ducado descoberto durante sessão) — não tem relevância na história da Ayla.
+
+**Por quê:** evitar costurar narrativa em torno de detalhe sem peso; deixar foco em rua → mercenários → Sirena.
+
+---
+
+## 2026-04-27 — Docs migrados pro padrão unificado + CLAUDE.md
+
+**Contexto:** Hub global criado em `_hub/` indexando os 4 projetos locais.
+
+**Decisão:** `docs/ficha-rpg-avalon.md` renomeado pra `docs/HANDOFF.md` (padronização cross-project). Adicionado `CLAUDE.md` raiz e `CHANGELOG.md`. Graphify rodado pela 1ª vez (38 nodes).
+
+**Por quê:** padroniza com os outros 3 projetos locais — mesmo protocolo de início/fim de sessão, mesmo formato de docs.
+
+---
+
 ## 2026-04-26 — Bootstrap
 - Estrutura de pastas + docs criadas em `OneDrive/Documentos/dev/ficha-rpg-avalon/`.
 - 3 páginas (frente + energia/anotações + habilidades) reproduzindo o layout da ficha física do sistema Avalon.
