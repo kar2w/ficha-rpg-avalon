@@ -2,6 +2,22 @@
 
 Marcos atingidos. Append-only.
 
+## 2026-04-28 — Logo Avalon gravada + fundo transparente + cache v27
+
+**Contexto:** Lucas mandou o PNG da logo Avalon no chat. Antes era pendência aberta — eu (Claude) não conseguia gravar imagem do chat em disco.
+
+**Decisão/Descoberta:**
+- Truque novo: `~/.claude/projects/<dir>/<session-id>.jsonl` armazena cada turno em JSONL, incluindo imagens enviadas como `type: image, source.media_type: image/png, source.data: <base64>`. Extraí com Python+`json.loads`+`base64.b64decode`, gravei em `assets/avalon.png` (212 KB).
+- 1ª versão tinha fundo bege opaco `(230,225,214)` — ficava como cartão recortado contra a paleta papel envelhecido.
+- Fix: flood fill (PIL) desde os 4 cantos com tolerância 18 por canal → 70% dos pixels viraram transparentes. Logo agora flutua.
+- Cache PWA bumpado de v26 → v27 pra forçar `controllerchange` + reload no celular.
+
+**Por quê:** logo era a única coisa visual quebrando a paleta. Resolver fechou a estética da ficha.
+
+**Pendência nova:** Lucas pediu logo "um pouco maior" (anotado em `project_pending_decisions.md` na memory).
+
+---
+
 ## 2026-04-27 — Backstory da Ayla rascunhada
 
 **Contexto:** Lucas pediu ajuda pra escrever a backstory da personagem.

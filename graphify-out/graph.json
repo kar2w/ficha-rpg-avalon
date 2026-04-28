@@ -135,7 +135,7 @@
       "source_file": "app.js",
       "source_location": "L302",
       "id": "app_renderarmas",
-      "community": 5,
+      "community": 6,
       "norm_label": "renderarmas()"
     },
     {
@@ -144,7 +144,7 @@
       "source_file": "app.js",
       "source_location": "L340",
       "id": "app_abrirmodalarmas",
-      "community": 5,
+      "community": 6,
       "norm_label": "abrirmodalarmas()"
     },
     {
@@ -225,7 +225,7 @@
       "source_file": "app.js",
       "source_location": "L663",
       "id": "app_abrirsidebar",
-      "community": 6,
+      "community": 5,
       "norm_label": "abrirsidebar()"
     },
     {
@@ -234,7 +234,7 @@
       "source_file": "app.js",
       "source_location": "L668",
       "id": "app_mostraraba",
-      "community": 6,
+      "community": 5,
       "norm_label": "mostraraba()"
     },
     {
@@ -332,9 +332,9 @@
       "file_type": "rationale",
       "source_file": "app.py",
       "source_location": "L1",
-      "id": "app_rationale_1",
       "community": 1,
-      "norm_label": "servidor da ficha avalon: serve estaticos + sync de estado.  auth: basic auth op"
+      "norm_label": "servidor da ficha avalon: serve estaticos + sync de estado.  auth: basic auth op",
+      "id": "app_rationale_1"
     },
     {
       "label": "sw.js",

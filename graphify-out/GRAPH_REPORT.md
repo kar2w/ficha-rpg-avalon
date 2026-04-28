@@ -1,7 +1,7 @@
-# Graph Report - ficha-rpg-avalon  (2026-04-27)
+# Graph Report - ficha-rpg-avalon  (2026-04-28)
 
 ## Corpus Check
-- 3 files · ~8,323 words
+- 3 files · ~16,360 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -55,20 +55,20 @@ Nodes (4): cacheLocal(), lerCampos(), salvar(), syncPull()
 
 ### Community 5 - "Community 5"
 Cohesion: 1.0
-Nodes (2): abrirModalArmas(), renderArmas()
+Nodes (2): abrirSidebar(), mostrarAba()
 
 ### Community 6 - "Community 6"
 Cohesion: 1.0
-Nodes (2): abrirSidebar(), mostrarAba()
+Nodes (2): abrirModalArmas(), renderArmas()
 
 ## Knowledge Gaps
 - **1 isolated node(s):** `Servidor da Ficha Avalon: serve estáticos + sync de estado.  Auth: Basic Auth op`
   These have ≤1 connection - possible missing edges or undocumented components.
 - **Thin community `Community 1`** (8 nodes): `criar_app()`, `_eh_lan()`, `_gravar_estado()`, `_ip_real()`, `_ler_env()`, `_ler_estado()`, `app.py`, `Servidor da Ficha Avalon: serve estáticos + sync de estado.  Auth: Basic Auth op`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 5`** (2 nodes): `abrirModalArmas()`, `renderArmas()`
+- **Thin community `Community 5`** (2 nodes): `abrirSidebar()`, `mostrarAba()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 6`** (2 nodes): `abrirSidebar()`, `mostrarAba()`
+- **Thin community `Community 6`** (2 nodes): `abrirModalArmas()`, `renderArmas()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 
 ## Suggested Questions
