@@ -1,6 +1,6 @@
 "use strict";
 
-const CACHE = "ficha-avalon-v26";
+const CACHE = "ficha-avalon-v27";
 const ASSETS = [
   "./",
   "./index.html",
