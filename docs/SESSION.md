@@ -20,7 +20,7 @@ Estado atual e tarefas em andamento. Lê no início; atualiza no fim.
 
 ### Em aberto (manutenção)
 
-- 🔧 **Logo Avalon**: Lucas precisa salvar PNG em `assets/avalon.png` manualmente.
+- ✅ **Logo Avalon**: gravada em `assets/avalon.png` em 2026-04-28 (extraída do log da sessão pelo Claude). 212 KB, dourada com escudo+espada+folhagens.
 - 🔧 **Validação visual em iPhone real** — só foi testado via DOM dimensions.
 
 ---
