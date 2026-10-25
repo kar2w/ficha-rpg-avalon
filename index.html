@@ -160,7 +160,17 @@
 
       <div class="card vinculos-card">
         <div class="card-title">VÍNCULOS:</div>
-        <textarea data-field="vinculos"></textarea>
+        <table class="vinculos-tabela">
+          <thead>
+            <tr>
+              <th class="col-nome">Quem</th>
+              <th class="col-tipo">Tipo</th>
+              <th class="col-acao"></th>
+            </tr>
+          </thead>
+          <tbody id="vinculos-body"></tbody>
+        </table>
+        <button id="btn-add-vinculo" type="button" class="btn-add">+ Adicionar vínculo</button>
       </div>
 
       <div class="card pets-card">
@@ -301,6 +311,18 @@
       <button class="modal-close" type="button" aria-label="Fechar">×</button>
     </header>
     <textarea id="modal-anotacoes" class="lined modal-textarea" rows="14" placeholder="Anotações sobre este encontro…"></textarea>
+  </div>
+</div>
+
+<!-- ============== MODAL DE DETALHES DO VÍNCULO ============== -->
+<div id="modal-vinculo" class="modal-backdrop" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-vinculo-titulo">
+    <header class="modal-header">
+      <span class="modal-eyebrow">Vínculo</span>
+      <span id="modal-vinculo-titulo" class="modal-title">—</span>
+      <button class="modal-close" type="button" aria-label="Fechar">×</button>
+    </header>
+    <textarea id="modal-vinculo-detalhes" class="lined modal-textarea" rows="14" placeholder="Como o vínculo foi criado, momentos importantes…"></textarea>
   </div>
 </div>
 

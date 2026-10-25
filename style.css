@@ -676,10 +676,11 @@ body.sidebar-fixed .pages { margin-left: var(--sidebar-w); }
 .modal-textarea {
   flex: 1;
   margin: 16px;
-  width: auto;            /* sobrescreve o width:100% do .lined pra não estourar com a margem */
+  width: auto;
   min-height: 320px;
   align-self: stretch;
 }
+.modal-textarea.lined { width: auto; }  /* (0,2,0) > .lined (0,1,0) — evita overflow com a margem */
 
 /* ===== Modal de armas (lista) ===== */
 .modal-lista { width: min(520px, 100%); }
@@ -788,7 +789,7 @@ input[type="text"], textarea {
   width: 100%;
 }
 input[type="text"]:focus, textarea:focus {
-  background: var(--highlight);
+  background-color: var(--highlight);
   border-radius: 6px;
 }
 input[type="text"]::-webkit-outer-spin-button,
@@ -850,12 +851,15 @@ input[type="text"]::-webkit-inner-spin-button { -webkit-appearance: none; margin
 }
 .logo-avalon img {
   max-width: 100%;
-  max-height: 110px;
+  max-height: 240px;
   height: auto;
   display: block;
-  filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.25));
+  filter:
+    drop-shadow(0 10px 18px rgba(0,0,0,0.5))
+    drop-shadow(0 4px 6px rgba(0,0,0,0.3))
+    drop-shadow(2px 4px 6px rgba(0,0,0,0.25));
 }
-.logo-avalon.big-logo img { max-height: 130px; }
+.logo-avalon.big-logo img { max-height: 280px; }
 .logo-avalon-fallback {
   font-family: 'Cinzel', 'Trajan Pro', 'Georgia', serif;
   font-weight: 900;
@@ -1062,7 +1066,41 @@ textarea {
   line-height: 1.7;
 }
 .vinculos-card, .pets-card { display: flex; flex-direction: column; }
-.vinculos-card textarea, .pets-card textarea { flex: 1; min-height: 90px; }
+.pets-card textarea { flex: 1; min-height: 90px; }
+
+.vinculos-tabela {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 6px;
+}
+.vinculos-tabela thead th {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  text-align: left;
+  padding: 4px 6px;
+  border-bottom: 1px solid var(--hairline);
+}
+.vinculos-tabela .col-nome { width: 50%; }
+.vinculos-tabela .col-tipo { width: auto; }
+.vinculos-tabela .col-acao { width: 60px; text-align: right; }
+.vinculos-tabela tbody td {
+  padding: 4px 6px;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--hairline-2);
+}
+.vinculos-vazio {
+  text-align: center;
+  padding: 12px 8px;
+  font-style: italic;
+  color: rgba(26,26,26,0.55);
+  font-size: 13px;
+}
+.vinculos-card .btn-add { margin-top: 8px; align-self: flex-start; }
 .itens-card { display: flex; flex-direction: column; }
 .itens-card textarea { flex: 1; min-height: 110px; }
 

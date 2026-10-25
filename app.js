@@ -90,6 +90,7 @@ function lerCampos() {
   });
   data.encontros = encontros;
   data.itens = itens;
+  data.vinculos = vinculos;
   return data;
 }
 
@@ -135,8 +136,15 @@ function aplicarCampos(data) {
   } else {
     itens.length = 0;
   }
+  vinculos.length = 0;
+  if (Array.isArray(data.vinculos)) {
+    data.vinculos.forEach((v) => vinculos.push(v));
+  } else if (typeof data.vinculos === "string" && data.vinculos.trim()) {
+    vinculos.push({ id: novoId(), nome: "(importado)", tipo: "", detalhes: data.vinculos });
+  }
   renderEncontros();
   renderItens();
+  renderVinculos();
   // após carregar, recalcula altura do textarea da arma principal
   setTimeout(ajustarArma, 0);
 }
@@ -573,6 +581,115 @@ modalTextarea.addEventListener("input", () => {
   }
 });
 
+/* ===== Vínculos (lista dinâmica + modal) ===== */
+const vinculos = [];
+const vinculosBody = document.getElementById("vinculos-body");
+
+function renderVinculos() {
+  vinculosBody.innerHTML = "";
+  if (vinculos.length === 0) {
+    const tr = document.createElement("tr");
+    const td = document.createElement("td");
+    td.colSpan = 3;
+    td.className = "vinculos-vazio";
+    td.textContent = "Nenhum vínculo. Clica em + adicionar.";
+    tr.appendChild(td);
+    vinculosBody.appendChild(tr);
+    return;
+  }
+  vinculos.forEach((v) => {
+    const tr = document.createElement("tr");
+    tr.dataset.id = v.id;
+
+    const tdNome = document.createElement("td");
+    const inpNome = document.createElement("input");
+    inpNome.type = "text";
+    inpNome.className = "encontro-input";
+    inpNome.value = v.nome || "";
+    inpNome.placeholder = "Nome";
+    inpNome.addEventListener("input", () => { v.nome = inpNome.value; flagDirty(); });
+    tdNome.appendChild(inpNome);
+    tr.appendChild(tdNome);
+
+    const tdTipo = document.createElement("td");
+    const inpTipo = document.createElement("input");
+    inpTipo.type = "text";
+    inpTipo.className = "encontro-input";
+    inpTipo.value = v.tipo || "";
+    inpTipo.placeholder = "ex: mentor, irmão";
+    inpTipo.addEventListener("input", () => { v.tipo = inpTipo.value; flagDirty(); });
+    tdTipo.appendChild(inpTipo);
+    tr.appendChild(tdTipo);
+
+    const tdAcao = document.createElement("td");
+    const acoes = document.createElement("div");
+    acoes.className = "encontro-actions";
+    const btnNotas = document.createElement("button");
+    btnNotas.type = "button";
+    btnNotas.className = "btn-iconish notas" + (v.detalhes ? " tem-notas" : "");
+    btnNotas.title = "Detalhes";
+    btnNotas.textContent = "✎";
+    btnNotas.addEventListener("click", () => abrirModalVinculo(v));
+    const btnDel = document.createElement("button");
+    btnDel.type = "button";
+    btnDel.className = "btn-iconish del";
+    btnDel.title = "Remover";
+    btnDel.textContent = "×";
+    btnDel.addEventListener("click", () => {
+      if (!confirm(`Remover o vínculo "${v.nome || "(sem nome)"}"?`)) return;
+      const idx = vinculos.findIndex((x) => x.id === v.id);
+      if (idx >= 0) vinculos.splice(idx, 1);
+      renderVinculos();
+      flagDirty();
+    });
+    acoes.appendChild(btnNotas);
+    acoes.appendChild(btnDel);
+    tdAcao.appendChild(acoes);
+    tr.appendChild(tdAcao);
+
+    vinculosBody.appendChild(tr);
+  });
+}
+
+document.getElementById("btn-add-vinculo").addEventListener("click", () => {
+  vinculos.push({ id: novoId(), nome: "", tipo: "", detalhes: "" });
+  renderVinculos();
+  flagDirty();
+});
+
+const modalVinc = document.getElementById("modal-vinculo");
+const modalVincTitulo = document.getElementById("modal-vinculo-titulo");
+const modalVincTextarea = document.getElementById("modal-vinculo-detalhes");
+let vinculoAtivo = null;
+
+function abrirModalVinculo(v) {
+  vinculoAtivo = v;
+  modalVincTitulo.textContent = v.nome || "(sem nome)";
+  modalVincTextarea.value = v.detalhes || "";
+  modalVinc.hidden = false;
+  setTimeout(() => modalVincTextarea.focus(), 0);
+}
+function fecharModalVinculo() {
+  if (vinculoAtivo) {
+    vinculoAtivo.detalhes = modalVincTextarea.value;
+    renderVinculos();
+    flagDirty();
+  }
+  vinculoAtivo = null;
+  modalVinc.hidden = true;
+}
+modalVinc.querySelector(".modal-close").addEventListener("click", fecharModalVinculo);
+modalVinc.addEventListener("click", (e) => { if (e.target === modalVinc) fecharModalVinculo(); });
+document.addEventListener("keydown", (e) => {
+  if (!modalVinc.hidden && e.key === "Escape") fecharModalVinculo();
+});
+modalVincTextarea.addEventListener("input", () => {
+  if (vinculoAtivo) {
+    vinculoAtivo.detalhes = modalVincTextarea.value;
+    flagDirty();
+  }
+});
+
 /* ===== Export / Import / Reset ===== */
 
 document.getElementById("btn-export").addEventListener("click", () => {
@@ -620,8 +737,10 @@ document.getElementById("btn-reset").addEventListener("click", () => {
   });
   encontros.length = 0;
   itens.length = 0;
+  vinculos.length = 0;
   renderEncontros();
   renderItens();
+  renderVinculos();
   flagDirty();
 });
 
